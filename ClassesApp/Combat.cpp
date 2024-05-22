@@ -284,16 +284,6 @@ void Combat::changeAction(Characters& Player, Enemy& Enemy) {
 		setTurn(false);
 	}
 
-	// DEBUGGING, REMOVE THIS ALL WHEN FINISHED
-	else if (dir == 'p') {
-		setFighting(false);
-	}
-	else if (dir == 'k') {
-		Enemy.setHealthPoints(1);
-	}
-
-	// YES YOU FUTURE JOAN REMOVE THIS WHEN YOURE DONE
-
 }
 
 void Combat::start(Characters& Player, Enemy& Enemy) {
@@ -458,7 +448,10 @@ void Combat::flee(Characters& Player, Enemy& Enemy) {
 	}
 }
 
-// UNFINISHED CONTENT
+// UNFINISHED CONTENT, DEFINITELY MUST ADD THIS TO MAKE THE GAME COMPLETE
+// COULD IT BE THE SUPER ATTACK INSTEAD OF THE NORMAL ATTACK??
+// MAYBE, IT LOOKS INTERESTING
+// REMEMBER TO ADD HERITAGE JOAN
 void Combat::enemyAttack(Characters& Player, Enemy& Enemy) {
 	int size = 10;
 	int moment = 0;
@@ -485,21 +478,24 @@ void Combat::enemyAttack(Characters& Player, Enemy& Enemy) {
 	while (moment < size) {
 
 		// SET CURSOR AND PRINT COMBAT BOX
+		
+
 
 		for (int i = 0; i < size; i++)
 		{
 			for (int j = 0; j < size; j++)
 			{
+				// if i == moment print attackHitbox.j
 				if (i == Player.getCombatPosX() && j == Player.getCombatPosY())
 					cout << "O";
 				else cout << combatBox[i][j]; // NOT FINISHED
-
 			}
 		}
 
 		// if combatBox[Player.getPosition] = AttackSprite then take damage
 		if (combatBox[Player.getCombatPosX()][Player.getCombatPosY()]._Equal("@")) {
-			Player.setHP(Player.getHP());
+			// need a formula
+			Player.setHP(Player.getHP() - 3);
 		}
 
 	}

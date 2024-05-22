@@ -15,10 +15,6 @@ int Enemy::getAttackDmg() {
 	return _attackDmg;
 }
 
-int Enemy::getSuperAttack() {
-	return _superAttack;
-}
-
 string Enemy::getEnemyName() {
 	return _name;
 }
@@ -40,10 +36,6 @@ void Enemy::setAttackDmg(int dmg) {
 	_attackDmg = dmg;
 }
 
-void Enemy::setSuperAttack(int dmg) {
-	_superAttack = dmg;
-}
-
 void Enemy::setEnemyName(string name) {
 	_name = name;
 }
@@ -60,14 +52,6 @@ void Enemy::createEnemy(string name, int hp, int dmg) {
 	setAttackDmg(dmg);
 }
 
-// Special Enemy, include a fourth parameter for the superAttack DMG
-void Enemy::createEnemy(string name, int hp, int dmg, int superdmg) {
-	setEnemyName(name);
-	setHealthPoints(hp);
-	setAttackDmg(dmg);
-	setSuperAttack(superdmg);
-}
-
 /*
 ---------------------------------------------------------------------
 Methods
@@ -77,5 +61,5 @@ Methods
 //Returns all attributes
 void Enemy::getAttributes() {
 	cout << getEnemyName() << "\nHP " << getHealthPoints() << "\nDMG "
-		<< getAttackDmg() << "\nSuper Attack " << getSuperAttack() << "\n";
+		<< getAttackDmg() << "\n";
 }
