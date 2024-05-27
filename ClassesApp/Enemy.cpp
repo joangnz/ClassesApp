@@ -45,6 +45,13 @@ void Enemy::setEnemyName(string name) {
 Builders
 ---------------------------------------------------------------------
 */
+
+Enemy::Enemy(string name, int hp, int dmg) {
+	_name = name;
+	_healthPoints = hp;
+	_attackDmg = dmg;
+}
+
 // Normal Enemy, no super 
 void Enemy::createEnemy(string name, int hp, int dmg) {
 	setEnemyName(name);

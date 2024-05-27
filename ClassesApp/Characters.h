@@ -19,7 +19,7 @@ private:
 	bool _chosen = false;
 	COORD _position;
 	COORD _combatPos;
-	
+
 public:
 	// Methods
 	void getAttributes() {

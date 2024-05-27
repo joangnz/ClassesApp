@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+#include "SuperEnemy.h"
 #include "Characters.h"
 #include "Selection.h"
 #include "Utility.h"

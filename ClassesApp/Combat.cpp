@@ -10,6 +10,7 @@ bool Combat::_attacking = true;
 string Combat::sprite[10];
 string Combat::attackMeter[10][50];
 int attackMeterWidth = 50, attackMeterHeight = 10;
+string Combat::enemy;
 
 int Combat::getCurrentAction() {
 	return _currentAction;
@@ -122,7 +123,7 @@ void Combat::printHealthBars(Characters Player, Enemy Enemy) {
 
 	cout << "\t\t\t\t\t\t\tDoggo: ";
 
-  	for (int i = 0; i < enemyMaxHP; i++)
+	for (int i = 0; i < enemyMaxHP; i++)
 	{
 		if (Enemy.getHealthPoints() / 10 >= i) {
 			cout << "\033[0;30;47m \033[1;37;40m";
@@ -132,7 +133,7 @@ void Combat::printHealthBars(Characters Player, Enemy Enemy) {
 		}
 	}
 
-	cout << "\t\tPlayer: ";
+	cout << "\t\t" << Player.getName() << ": ";
 	for (int i = 0; i < Player.getMaxHP(); i++)
 	{
 		if (Player.getHP() >= i) {
@@ -300,25 +301,21 @@ void Combat::start(Characters& Player, Enemy& Enemy) {
 			printScreen(Player, Enemy);
 			changeAction(Player, Enemy);
 		} while (getTurn());
-		
+
 		// Enemy attacks
 		int chance = rand() % 5 + 1;
-		if (chance == 5) {
-			cout << "Doggo throws a super attack!";
-			Utility::wait(1500);
-			Player.setHP(Player.getHP() - Enemy.getSuperAttack() - Player.getDef() * 2);
+
+		if (Player.getAgi() < chance * 20 && Combat::getFighting()) {
+			cout << "\t\t\t\t" << Enemy.getEnemyName() << " attacks you!";
+
+			Player.setHP(Player.getHP() - (Enemy.getAttackDmg() * (2 + chance / 5) - Player.getDef() * 4 / 10));
+			Player.setAgi(Player.getAgi() - 1);
 		}
-		else {
-			if (Player.getAgi() < chance * 20) {
-				cout << "Doggo attacks you!";
-				Utility::wait(1500);
-				Player.setHP(Player.getHP() - (Enemy.getAttackDmg() - Player.getDef()*4/10));
-				Player.setAgi(Player.getAgi() - 1);
-			}
-			else {
-				cout << "You dodged the attack!";
-			}
+		else if (Combat::getFighting()) {
+			cout << "You dodged the attack!";
 		}
+
+		Utility::wait(1500);
 
 		if (Player.getHP() < 0) {
 			setFighting(false);
@@ -378,15 +375,15 @@ void Combat::attack(Characters& Player, Enemy& Enemy) {
 			case ' ':
 				if (chance < Player.getAtkCh()) {
 					if (attackMeter[5][moment]._Equal(".")) {
-						Enemy.setHealthPoints(Enemy.getHealthPoints() - Player.getAtk());
+						Enemy.setHealthPoints(Enemy.getHealthPoints() - (Player.getAtk() + 5));
 						cout << "\n\t\t\t\tCritical!\n";
 					}
 					else if (attackMeter[5][moment]._Equal("|")) {
-						Enemy.setHealthPoints(Enemy.getHealthPoints() - Player.getAtk() - 5);
+						Enemy.setHealthPoints(Enemy.getHealthPoints() - Player.getAtk());
 						cout << "\n\t\t\t\tGood hit!\n";
 					}
 					else {
-						Enemy.setHealthPoints(Enemy.getHealthPoints() - Player.getAtk() - 10);
+						Enemy.setHealthPoints(Enemy.getHealthPoints() - (Player.getAtk() - 5));
 						cout << "\n\t\t\t\tDo better!\n";
 					}
 
@@ -402,7 +399,7 @@ void Combat::attack(Characters& Player, Enemy& Enemy) {
 			}
 		}
 
-		if (moment > attackMeterWidth-2) {
+		if (moment > attackMeterWidth - 2) {
 			setAttacking(false);
 		}
 
@@ -458,7 +455,7 @@ void Combat::enemyAttack(Characters& Player, Enemy& Enemy) {
 	string initBox[10][10];
 	string combatBox[10][10];
 	string attackHitbox[8] =
-	{" ","8"," ","8"," "," ","8","8"};
+	{ " ","8"," ","8"," "," ","8","8" };
 
 	for (int i = 0; i < size; i++)
 	{
@@ -474,11 +471,11 @@ void Combat::enemyAttack(Characters& Player, Enemy& Enemy) {
 			}
 		}
 	}
-	 // WHILE ATTACK REPRINT THE COMBAT BOX WITH THE CHARACTER
+	// WHILE ATTACK REPRINT THE COMBAT BOX WITH THE CHARACTER
 	while (moment < size) {
 
 		// SET CURSOR AND PRINT COMBAT BOX
-		
+
 
 
 		for (int i = 0; i < size; i++)

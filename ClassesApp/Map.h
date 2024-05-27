@@ -21,7 +21,7 @@ public:
 	static void initMap(); // Initial config
 	static void printMap(Characters Player); // Prints the map
 	static void updateMap(NonPlayables Array[]); // Adds the NPCs to the map
-	static void move(Characters &Player); // Moves the player
+	static void move(Characters& Player); // Moves the player
 	static void interact(Characters Player, int action);
 	static void choose(int action);
 	static bool nearbyNPC(Characters Player);

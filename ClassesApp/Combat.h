@@ -16,6 +16,7 @@ private:
 	static bool _attacking;
 	static string sprite[];
 	static string attackMeter[10][50];
+	static string enemy;
 public:
 	static int getCurrentAction();
 	static int getAttackTime();

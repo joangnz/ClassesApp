@@ -1,10 +1,4 @@
 #include "Classes.h"
-/*
-TRY CHANGING THE CONSTANT PRINTS TO ONLY PRINT WHEN THE PLAYER MOVES,
-AND IF POSSIBLE, ONLY CHANGING WHAT'S AROUND THE PLAYER
-
-THIS WILL GIVE BETTER VISUAL OPTIMIZATION AND PROBABLY BETTER PERFORMANCE
-*/
 
 using namespace std;
 
@@ -21,9 +15,9 @@ int main()
 
 	nonPlayablesArray[0] = Zero;
 
-	Enemy Doggo;
+	Enemy Doggo("Doggo", 100, 2);
 
-	Doggo.createEnemy("Doggo", 100, 2, 4);
+	SuperEnemy Doggy("Doggy", 100, 2, 4);
 
 	Selection::printPage(Selection::getPage());
 
@@ -50,9 +44,8 @@ int main()
 		}
 	}
 
-
 	system("cls");
-	
+
 	Map::initMap();
 	Map::updateMap(nonPlayablesArray);
 	Map::printMap(Player);
@@ -63,14 +56,20 @@ int main()
 		Map::printMap(Player);
 	}
 
-	// Add Combat Sequence
 	system("cls");
-	Combat::start(Player, Doggo);
+
+	// if superFight then fight doggy, else fight doggo
+	if (true) {
+		Combat::start(Player, Doggy);
+	}
+	else {
+		Combat::start(Player, Doggo);
+	}
 
 	PlaySound(NULL, NULL, SND_FILENAME | SND_ASYNC); // STOP MUSIC
 
 	system("cls");
 	if (Player.getHP() <= 0) cout << "You've died.";
-	else cout << "You won.";
+	else cout << "You won.\n";
 	cout << "Game Over.\n\n";
 }

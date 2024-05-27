@@ -153,7 +153,7 @@ void Characters::createCharacter(int id) {
 	case 0:
 		setMaxHP(20);
 		setHP(20);
-		setAtk(10);
+		setAtk(15);
 		setDef(5);
 		setAgi(10);
 		setDefaultAgi(10);

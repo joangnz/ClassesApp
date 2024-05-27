@@ -158,17 +158,22 @@ void Map::choose(int action) {
 	if (action == 1) {
 		Combat::setFighting(true);
 	}
+
+	/*
+	if enemy then Combat::enemy = Doggy
+	else Combat::enemy = Doggo
+	*/
 }
 
 
 
 bool Map::nearbyNPC(Characters Player) {
 	if (
-		   (map[Player.getPositionX() + 1][Player.getPositionY()] == "0")
+		(map[Player.getPositionX() + 1][Player.getPositionY()] == "0")
 		|| (map[Player.getPositionX() - 1][Player.getPositionY()] == "0")
 		|| (map[Player.getPositionX()][Player.getPositionY() - 1] == "0")
 		|| (map[Player.getPositionX()][Player.getPositionY() + 1] == "0")
-	)	return true;
+		)	return true;
 	else return false;
 }
 
@@ -176,7 +181,7 @@ void Map::printFightDialog(int current) {
 	printDialogBoxLine();
 	printEmptyDialogLine();
 	cout << "#\t\tDo you want to fight?";
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { (short)(getWidth()*2-2), 2});
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { (short)(getWidth() * 2 - 2), 2 });
 	cout << "#\n";
 	printEmptyDialogLine();
 
@@ -206,7 +211,7 @@ void Map::printDialogBoxLine() {
 
 void Map::printEmptyDialogLine() {
 	cout << "# ";
-	for (int i = 0; i < getWidth() - 2 ; i++)
+	for (int i = 0; i < getWidth() - 2; i++)
 	{
 		cout << "  ";
 	}

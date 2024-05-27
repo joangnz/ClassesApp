@@ -4,7 +4,7 @@
 class Utility
 {
 private:
-	
+
 public:
 	static void wait(int milliseconds);
 	static void combatTick();

@@ -22,8 +22,8 @@ public:
 	void setEnemyName(string name);
 
 	// builders
+	Enemy(string name, int hp, int dmg);
 	void createEnemy(string name, int hp, int dmg);
-	void createEnemy(string name, int hp, int dmg, int superdmg);
 
 	// methods
 	void getAttributes();
