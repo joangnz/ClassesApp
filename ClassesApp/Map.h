@@ -12,11 +12,15 @@ class Map
 private:
 	static int height, width;
 	static string map[30][30];
+	static int _npc;
 public:
 	static int getHeight(), getWidth();
 
 	static void setHeight(int pHeight), setWidth(int pWidth);
 	static void setMap();
+	static void setNpc(int npc);
+
+	static int getNpc();
 
 	static void initMap(); // Initial config
 	static void printMap(Characters Player); // Prints the map
@@ -24,7 +28,7 @@ public:
 	static void move(Characters& Player); // Moves the player
 	static void interact(Characters Player, int action);
 	static void choose(int action);
-	static bool nearbyNPC(Characters Player);
+	static int nearbyNPC(Characters Player);
 	static void printFightDialog(int current);
 	static void printDialogBoxLine();
 	static void printEmptyDialogLine();

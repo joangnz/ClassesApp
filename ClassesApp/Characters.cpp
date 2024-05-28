@@ -160,7 +160,7 @@ void Characters::createCharacter(int id) {
 		setAtkCh(95);
 		setName("Frisk");
 		setPosition(0, 0);
-		setCombatPos(4, 4);
+		setCombatPos(7, 7);
 		break;
 	case 1:
 		setMaxHP(20);
@@ -172,7 +172,7 @@ void Characters::createCharacter(int id) {
 		setAtkCh(95);
 		setName("Chara");
 		setPosition(0, 0);
-		setCombatPos(4, 4);
+		setCombatPos(7, 7);
 		break;
 	case 2:
 		setMaxHP(5);
@@ -184,7 +184,7 @@ void Characters::createCharacter(int id) {
 		setAtkCh(95);
 		setName("Sans");
 		setPosition(0, 0);
-		setCombatPos(4, 4);
+		setCombatPos(7, 7);
 		break;
 	}
 }

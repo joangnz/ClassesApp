@@ -12,8 +12,11 @@ int main()
 
 	NonPlayables Zero;
 	Zero.buildCharacter(1, 20, 20);
+	NonPlayables Six;
+	Six.buildCharacter(2, 10, 10);
 
 	nonPlayablesArray[0] = Zero;
+	nonPlayablesArray[1] = Six;
 
 	Enemy Doggo("Doggo", 100, 2);
 
@@ -59,10 +62,10 @@ int main()
 	system("cls");
 
 	// if superFight then fight doggy, else fight doggo
-	if (true) {
+	if (Map::getNpc() == 1) {
 		Combat::start(Player, Doggy);
 	}
-	else {
+	else if (Map::getNpc() == 2) {
 		Combat::start(Player, Doggo);
 	}
 

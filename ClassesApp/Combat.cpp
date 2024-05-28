@@ -121,7 +121,7 @@ void Combat::printSprite() {
 void Combat::printHealthBars(Characters Player, Enemy Enemy) {
 	int enemyMaxHP = 10;
 
-	cout << "\t\t\t\t\t\t\tDoggo: ";
+	cout << "\t\t\t\t\t\t\t" + Enemy.getEnemyName() + ": ";
 
 	for (int i = 0; i < enemyMaxHP; i++)
 	{
@@ -301,8 +301,8 @@ void Combat::start(Characters& Player, Enemy& Enemy) {
 			printScreen(Player, Enemy);
 			changeAction(Player, Enemy);
 		} while (getTurn());
-
-		// Enemy attacks
+		
+		
 		int chance = rand() % 5 + 1;
 
 		if (Player.getAgi() < chance * 20 && Combat::getFighting()) {
@@ -314,6 +314,46 @@ void Combat::start(Characters& Player, Enemy& Enemy) {
 		else if (Combat::getFighting()) {
 			cout << "You dodged the attack!";
 		}
+
+
+		Utility::wait(1500);
+
+		if (Player.getHP() < 0) {
+			setFighting(false);
+		}
+		else {
+			setTurn(true);
+		}
+
+		if (Player.getAgi() < 5) {
+			Player.setAgi(Player.getDefaultAgi());
+		}
+
+		if (Player.getHP() <= 0) setFighting(false);
+		else if (Enemy.getHealthPoints() <= 0) setFighting(false);
+
+	}
+
+	cout << "\n\n";
+}
+
+void Combat::start(Characters& Player, SuperEnemy& Enemy) {
+	// BGM.wav must be in folder ClassesApp\ClassesApp\
+	// can be changed by any .wav file as long as the name is still "BGM.wav"
+
+	PlaySound(TEXT("BGM.wav"), NULL, SND_FILENAME | SND_ASYNC);
+
+	initSprite();
+	initAttackMeter(Player);
+	setFighting(true);
+	while (getFighting()) {
+		do {
+			printScreen(Player, Enemy);
+			changeAction(Player, Enemy);
+		} while (getTurn());
+
+		// Enemy attacks
+		enemyAttack(Player, Enemy);
 
 		Utility::wait(1500);
 
@@ -446,22 +486,19 @@ void Combat::flee(Characters& Player, Enemy& Enemy) {
 }
 
 // UNFINISHED CONTENT, DEFINITELY MUST ADD THIS TO MAKE THE GAME COMPLETE
-// COULD IT BE THE SUPER ATTACK INSTEAD OF THE NORMAL ATTACK??
-// MAYBE, IT LOOKS INTERESTING
-// REMEMBER TO ADD HERITAGE JOAN
-void Combat::enemyAttack(Characters& Player, Enemy& Enemy) {
-	int size = 10;
+void Combat::enemyAttack(Characters& Player, SuperEnemy& Enemy) {
+	int size = 15;
 	int moment = 0;
-	string initBox[10][10];
-	string combatBox[10][10];
-	string attackHitbox[8] =
-	{ " ","8"," ","8"," "," ","8","8" };
+	string initBox[15][15];
+	string combatBox[15][15];
+	string attackHitbox[15] =
+	{ "#", " ","8"," ","8"," "," ","8","8", " ", " ", "8", " ", "8", "#"};
 
 	for (int i = 0; i < size; i++)
 	{
 		for (int j = 0; j < size; j++)
 		{
-			if (i == 0 || i == 9 || j == 0 || j == 9) {
+			if (i == 0 || i == size - 1 || j == 0 || j == size - 1) {
 				combatBox[i][j] = "#";
 				initBox[i][j] = "#";
 			}
@@ -470,33 +507,55 @@ void Combat::enemyAttack(Characters& Player, Enemy& Enemy) {
 				initBox[i][j] = " ";
 			}
 		}
+
 	}
 	// WHILE ATTACK REPRINT THE COMBAT BOX WITH THE CHARACTER
-	while (moment < size) {
-
+	while (moment < size - 1) {
+		int track = 0;
 		// SET CURSOR AND PRINT COMBAT BOX
-
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0,0 });
 
 
 		for (int i = 0; i < size; i++)
 		{
 			for (int j = 0; j < size; j++)
 			{
-				// if i == moment print attackHitbox.j
-				if (i == Player.getCombatPosX() && j == Player.getCombatPosY())
+				if (i == moment) {
+					cout << attackHitbox[j];
+					if (i == Player.getCombatPosX() && j == Player.getCombatPosY()) {
+						Player.setHP(Player.getHP() - Enemy.getSuperDmg() * 2);
+					}
+				}
+				else if (i == Player.getCombatPosX() && j == Player.getCombatPosY()) 
 					cout << "O";
-				else cout << combatBox[i][j]; // NOT FINISHED
+				else cout << combatBox[i][j];
+
+				cout << " ";
 			}
+
+			cout << "\n";
 		}
 
-		// if combatBox[Player.getPosition] = AttackSprite then take damage
-		if (combatBox[Player.getCombatPosX()][Player.getCombatPosY()]._Equal("@")) {
-			// need a formula
-			Player.setHP(Player.getHP() - 3);
-		}
+		track++;
+
+		if (track%3 == 1) moment++;
+		Utility::wait(80);
 
 	}
 
+	// clear top left corner
+	Utility::wait(400);
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0,0 });
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			cout << "  ";
+		}
+		cout << "\n";
+	}
+
+	system("pause");
 }
 
 void Combat::printDialogBox(string type, bool success) {

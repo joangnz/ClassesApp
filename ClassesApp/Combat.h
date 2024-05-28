@@ -2,6 +2,7 @@
 #include "Header.h"
 #include "Characters.h"
 #include "Enemy.h"
+#include "SuperEnemy.h"
 #include "Utility.h"
 
 using namespace std;
@@ -49,12 +50,13 @@ public:
 	static void changeAction(Characters& Player, Enemy& Enemy); // Change action to next/former
 
 	static void start(Characters& Player, Enemy& Enemy);
+	static void start(Characters& Player, SuperEnemy& Enemy);
 	static void attack(Characters& Player, Enemy& Enemy);
 	static void talk(Characters& Player, Enemy& Enemy);
 	static void mercy(Characters& Player, Enemy& Enemy);
 	static void flee(Characters& Player, Enemy& Enemy);
 
-	static void enemyAttack(Characters& Player, Enemy& Enemy);
+	static void enemyAttack(Characters& Player, SuperEnemy& Enemy);
 
 	static void printDialogBox(string type, bool success);
 };

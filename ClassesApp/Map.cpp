@@ -2,6 +2,7 @@
 
 int Map::height, Map::width;
 string Map::map[30][30];
+int Map::_npc = -1;
 
 int Map::getHeight() {
 	return height;
@@ -37,6 +38,14 @@ void Map::setMap() {
 	}
 }
 
+void Map::setNpc(int npc) {
+	_npc = npc;
+}
+
+int Map::getNpc() {
+	return _npc;
+}
+
 void Map::initMap() {
 	setHeight(30);
 	setWidth(30);
@@ -58,11 +67,8 @@ void Map::printMap(Characters Player) {
 }
 
 void Map::updateMap(NonPlayables Array[]) {
-	// ADDS NPCS
-	for (int i = 0; i < NonPlayables::getNpcCount(); i++)
-	{
-		map[Array[i].getCoordinatesX()][Array[i].getCoordinatesY()] = "0";
-	}
+	map[Array[0].getCoordinatesX()][Array[0].getCoordinatesY()] = "0";
+	map[Array[1].getCoordinatesX()][Array[1].getCoordinatesY()] = "6";
 }
 
 
@@ -95,6 +101,9 @@ void Map::move(Characters& Player) {
 		if (map[Player.getPositionX()][Player.getPositionY()] == "0") {
 			Player.setPosition(previous.X, previous.Y);
 		}
+		else if (map[Player.getPositionX()][Player.getPositionY()] == "6") {
+			Player.setPosition(previous.X, previous.Y);
+		}
 		else if (map[Player.getPositionX()][Player.getPositionY()] == "#") {
 			Player.setPosition(previous.X, previous.Y);
 		}
@@ -104,9 +113,9 @@ void Map::move(Characters& Player) {
 void Map::interact(Characters Player, int action) {
 	bool loop = true;
 	char direction;
+	int _nearbyNPC = nearbyNPC(Player);
 
-	// TODO IF PLAYER NEAR NPC DO THIS ALL
-	if (nearbyNPC(Player)) {
+	if (_nearbyNPC != 0) {
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0,0 });
 
 		printFightDialog(action);
@@ -144,6 +153,7 @@ void Map::interact(Characters Player, int action) {
 					break;
 				case ' ':
 					choose(action);
+					setNpc(_nearbyNPC);
 					loop = false;
 					break;
 				}
@@ -158,23 +168,23 @@ void Map::choose(int action) {
 	if (action == 1) {
 		Combat::setFighting(true);
 	}
-
-	/*
-	if enemy then Combat::enemy = Doggy
-	else Combat::enemy = Doggo
-	*/
 }
 
 
-
-bool Map::nearbyNPC(Characters Player) {
+int Map::nearbyNPC(Characters Player) {
 	if (
 		(map[Player.getPositionX() + 1][Player.getPositionY()] == "0")
 		|| (map[Player.getPositionX() - 1][Player.getPositionY()] == "0")
 		|| (map[Player.getPositionX()][Player.getPositionY() - 1] == "0")
 		|| (map[Player.getPositionX()][Player.getPositionY() + 1] == "0")
-		)	return true;
-	else return false;
+		)	return 1;
+	else if (
+		(map[Player.getPositionX() + 1][Player.getPositionY()] == "6")
+		|| (map[Player.getPositionX() - 1][Player.getPositionY()] == "6")
+		|| (map[Player.getPositionX()][Player.getPositionY() - 1] == "6")
+		|| (map[Player.getPositionX()][Player.getPositionY() + 1] == "6")
+		) return 2;
+	else return 0;
 }
 
 void Map::printFightDialog(int current) {
