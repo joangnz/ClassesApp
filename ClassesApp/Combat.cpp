@@ -485,7 +485,11 @@ void Combat::flee(Characters& Player, Enemy& Enemy) {
 	}
 }
 
-// UNFINISHED CONTENT, DEFINITELY MUST ADD THIS TO MAKE THE GAME COMPLETE
+/*
+TO DO
+FIX FORMULA TO COUNT DEFENSE
+ADD CONSISTENT MOVEMENT
+*/
 void Combat::enemyAttack(Characters& Player, SuperEnemy& Enemy) {
 	int size = 15;
 	int moment = 0;
@@ -527,12 +531,11 @@ void Combat::enemyAttack(Characters& Player, SuperEnemy& Enemy) {
 					}
 				}
 				else if (i == Player.getCombatPosX() && j == Player.getCombatPosY()) 
-					cout << "O";
+					cout << "\033[1;31mO\033[1;97m";
 				else cout << combatBox[i][j];
 
 				cout << " ";
 			}
-
 			cout << "\n";
 		}
 
@@ -554,8 +557,6 @@ void Combat::enemyAttack(Characters& Player, SuperEnemy& Enemy) {
 		}
 		cout << "\n";
 	}
-
-	system("pause");
 }
 
 void Combat::printDialogBox(string type, bool success) {
