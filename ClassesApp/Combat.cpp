@@ -497,6 +497,7 @@ void Combat::enemyAttack(Characters& Player, SuperEnemy& Enemy) {
 	string combatBox[15][15];
 	string attackHitbox[15] =
 	{ "#", " ","8"," ","8"," "," ","8","8", " ", " ", "8", " ", "8", "#" };
+	Player.setCombatPos(7, 7);
 
 	for (int i = 0; i < size; i++)
 	{
@@ -513,16 +514,16 @@ void Combat::enemyAttack(Characters& Player, SuperEnemy& Enemy) {
 		}
 
 	}
-	// WHILE ATTACK REPRINT THE COMBAT BOX WITH THE CHARACTER
+
 	while (moment < size - 1) {
 		int track = 0;
-		// SET CURSOR AND PRINT COMBAT BOX
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0,0 });
 
 		for (int i = 0; i < size; i++)
 		{
 			for (int j = 0; j < size; j++)
 			{
+
 				if (i == moment) {
 					cout << attackHitbox[j];
 					if (i == Player.getCombatPosX() && j == Player.getCombatPosY()) {
@@ -538,10 +539,15 @@ void Combat::enemyAttack(Characters& Player, SuperEnemy& Enemy) {
 			cout << "\n";
 		}
 
+		if (moment == 0) {
+			Utility::wait(1000);
+		}
+
 		track++;
 
-		if (track % 3 == 1) moment++;
-		Utility::wait(80);
+		if (track % 10 == 1) moment++;
+		move(Player);
+		Utility::wait(30);
 
 	}
 
@@ -602,4 +608,25 @@ void Combat::printDialogBox(string type, bool success) {
 
 	cout << messages[x][y] << "\n";
 	system("pause");
+}
+
+void Combat::move(Characters& Player) {
+	if (_kbhit()) {
+		char dir = tolower(_getch());
+
+		switch (dir) {
+		case 'w':
+			Player.setCombatPosY(Player.getCombatPosY() + 1);
+			break;
+		case 'a':
+			Player.setCombatPosX(Player.getCombatPosX() + 1);
+			break;
+		case 's':
+			Player.setCombatPosY(Player.getCombatPosY() - 1);
+			break;
+		case 'd':
+			Player.setCombatPosX(Player.getCombatPosX() - 1);
+			break;
+		}
+	}
 }

@@ -57,6 +57,7 @@ public:
 	static void flee(Characters& Player, Enemy& Enemy);
 
 	static void enemyAttack(Characters& Player, SuperEnemy& Enemy);
+	static void move(Characters& Player);
 
 	static void printDialogBox(string type, bool success);
 };
