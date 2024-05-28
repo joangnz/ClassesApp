@@ -5,11 +5,12 @@ using namespace std;
 int main()
 {
 	srand(time(NULL));
+
 	bool choosing = true;
-	NonPlayables nonPlayablesArray[3];
 
 	Characters Player;
 
+	NonPlayables nonPlayablesArray[3];
 	NonPlayables Zero;
 	Zero.buildCharacter(1, 20, 20);
 	NonPlayables Six;
@@ -69,7 +70,7 @@ int main()
 		Combat::start(Player, Doggo);
 	}
 
-	PlaySound(NULL, NULL, SND_FILENAME | SND_ASYNC); // STOP MUSIC
+	PlaySound(NULL, NULL, SND_FILENAME | SND_ASYNC);
 
 	system("cls");
 	if (Player.getHP() <= 0) cout << "You've died.";

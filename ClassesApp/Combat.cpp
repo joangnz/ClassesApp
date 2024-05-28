@@ -301,8 +301,8 @@ void Combat::start(Characters& Player, Enemy& Enemy) {
 			printScreen(Player, Enemy);
 			changeAction(Player, Enemy);
 		} while (getTurn());
-		
-		
+
+
 		int chance = rand() % 5 + 1;
 
 		if (Player.getAgi() < chance * 20 && Combat::getFighting()) {
@@ -496,7 +496,7 @@ void Combat::enemyAttack(Characters& Player, SuperEnemy& Enemy) {
 	string initBox[15][15];
 	string combatBox[15][15];
 	string attackHitbox[15] =
-	{ "#", " ","8"," ","8"," "," ","8","8", " ", " ", "8", " ", "8", "#"};
+	{ "#", " ","8"," ","8"," "," ","8","8", " ", " ", "8", " ", "8", "#" };
 
 	for (int i = 0; i < size; i++)
 	{
@@ -519,7 +519,6 @@ void Combat::enemyAttack(Characters& Player, SuperEnemy& Enemy) {
 		// SET CURSOR AND PRINT COMBAT BOX
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0,0 });
 
-
 		for (int i = 0; i < size; i++)
 		{
 			for (int j = 0; j < size; j++)
@@ -530,7 +529,7 @@ void Combat::enemyAttack(Characters& Player, SuperEnemy& Enemy) {
 						Player.setHP(Player.getHP() - Enemy.getSuperDmg() * 2);
 					}
 				}
-				else if (i == Player.getCombatPosX() && j == Player.getCombatPosY()) 
+				else if (i == Player.getCombatPosX() && j == Player.getCombatPosY())
 					cout << "\033[1;31mO\033[1;97m";
 				else cout << combatBox[i][j];
 
@@ -541,7 +540,7 @@ void Combat::enemyAttack(Characters& Player, SuperEnemy& Enemy) {
 
 		track++;
 
-		if (track%3 == 1) moment++;
+		if (track % 3 == 1) moment++;
 		Utility::wait(80);
 
 	}
