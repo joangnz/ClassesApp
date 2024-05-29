@@ -21,12 +21,6 @@ private:
 	COORD _combatPos;
 
 public:
-	// Methods
-	void getAttributes() {
-		cout << _id << "\n" << _maxHP << "\n" << _hp <<
-			"\n" << _atk << "\n" << _def << "\n" << _agi <<
-			"\n" << _atkCh << "\n";
-	}
 
 	// Getters
 	int getID();
@@ -66,35 +60,4 @@ public:
 
 	// Builders
 	void createCharacter(int id);
-
-
-	// Other
-
-	/*
-	Characters:
-		0 - Frisk
-			MaxHP = 20
-			HP = 20
-			Atk = 10
-			Def = 5
-			Agi = 10
-			AtkCh = 90
-
-		1 - Chara
-			MaxHP = 20
-			HP = 20
-			Atk = 20
-			Def = 0
-			Agi = 20
-			AtkCh = 95
-
-		2 - Sans
-			MaxHP = 5
-			HP = 5
-			Atk = 20
-			Def = 0
-			Agi = 100
-			AtkCh = 95
-	*/
 };
-

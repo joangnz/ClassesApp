@@ -352,7 +352,6 @@ void Combat::start(Characters& Player, SuperEnemy& Enemy) {
 			changeAction(Player, Enemy);
 		} while (getTurn());
 
-		// Enemy attacks
 		enemyAttack(Player, Enemy);
 
 		Utility::wait(1500);
@@ -485,18 +484,14 @@ void Combat::flee(Characters& Player, Enemy& Enemy) {
 	}
 }
 
-/*
-TO DO
-FIX FORMULA TO COUNT DEFENSE
-ADD CONSISTENT MOVEMENT
-*/
 void Combat::enemyAttack(Characters& Player, SuperEnemy& Enemy) {
-	int size = 15;
+	const int size = 15;
 	int moment = 0;
-	string initBox[15][15];
-	string combatBox[15][15];
-	string attackHitbox[15] =
+	string initBox[size][size];
+	string combatBox[size][size];
+	string attackHitbox[size] =
 	{ "#", " ","8"," ","8"," "," ","8","8", " ", " ", "8", " ", "8", "#" };
+
 	Player.setCombatPos(7, 7);
 
 	for (int i = 0; i < size; i++)
@@ -516,7 +511,6 @@ void Combat::enemyAttack(Characters& Player, SuperEnemy& Enemy) {
 	}
 
 	while (moment < size - 1) {
-		int track = 0;
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0,0 });
 
 		for (int i = 0; i < size; i++)
@@ -525,8 +519,9 @@ void Combat::enemyAttack(Characters& Player, SuperEnemy& Enemy) {
 			{
 
 				if (i == moment) {
-					cout << attackHitbox[j];
-					if (i == Player.getCombatPosX() && j == Player.getCombatPosY()) {
+					if (i == Player.getCombatPosX() && j == Player.getCombatPosY()) cout << "\033[1;31mO\033[1;97m";
+					else cout << attackHitbox[j];
+					if (i == Player.getCombatPosX() && j == Player.getCombatPosY() && attackHitbox[j]._Equal("8")) {
 						Player.setHP(Player.getHP() - Enemy.getSuperDmg() * 2);
 					}
 				}
@@ -543,9 +538,7 @@ void Combat::enemyAttack(Characters& Player, SuperEnemy& Enemy) {
 			Utility::wait(1000);
 		}
 
-		track++;
-
-		if (track % 10 == 1) moment++;
+		moment++;
 		move(Player);
 		Utility::wait(30);
 
@@ -616,16 +609,16 @@ void Combat::move(Characters& Player) {
 
 		switch (dir) {
 		case 'w':
-			Player.setCombatPosY(Player.getCombatPosY() + 1);
+			Player.setCombatPosX(Player.getCombatPosX() - 1);
 			break;
 		case 'a':
-			Player.setCombatPosX(Player.getCombatPosX() + 1);
-			break;
-		case 's':
 			Player.setCombatPosY(Player.getCombatPosY() - 1);
 			break;
+		case 's':
+			Player.setCombatPosX(Player.getCombatPosX() + 1);
+			break;
 		case 'd':
-			Player.setCombatPosX(Player.getCombatPosX() - 1);
+			Player.setCombatPosY(Player.getCombatPosY() + 1);
 			break;
 		}
 	}

@@ -10,18 +10,20 @@ using namespace std;
 class Map
 {
 private:
-	static int height, width;
-	static string map[30][30];
+	static const int height = 30, width = 30;
+	static string map[height][width];
 	static int _npc;
 public:
-	static int getHeight(), getWidth();
 
-	static void setHeight(int pHeight), setWidth(int pWidth);
+	// getters
+	static int getHeight(), getWidth();
+	static int getNpc();
+
+	// setters
 	static void setMap();
 	static void setNpc(int npc);
 
-	static int getNpc();
-
+	// methods
 	static void initMap(); // Initial config
 	static void printMap(Characters Player); // Prints the map
 	static void updateMap(NonPlayables Array[]); // Adds the NPCs to the map

@@ -1,5 +1,16 @@
 #include "SuperEnemy.h"
 
+// getters
+int SuperEnemy::getSuperDmg() {
+	return _superDmg;
+}
+
+// setters
+void SuperEnemy::setSuperDmg(int superDmg) {
+	_superDmg = superDmg;
+}
+
+// builder
 SuperEnemy::SuperEnemy(
 	string name,
 	int hp,
@@ -9,13 +20,5 @@ SuperEnemy::SuperEnemy(
 		hp,
 		dmg)
 {
-	_superDmg = superDmg;
-}
-
-int SuperEnemy::getSuperDmg() {
-	return _superDmg;
-}
-
-void SuperEnemy::setSuperDmg(int superDmg) {
 	_superDmg = superDmg;
 }

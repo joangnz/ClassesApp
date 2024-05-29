@@ -2,11 +2,7 @@
 
 using namespace std;
 
-/*
----------------------------------------------------------------------
-Getters
----------------------------------------------------------------------
-*/
+// getters
 int Characters::getID() {
 	return _id;
 }
@@ -71,11 +67,7 @@ int Characters::getCombatPosY() {
 	return _combatPos.Y;
 }
 
-/*
----------------------------------------------------------------------
-Setters
----------------------------------------------------------------------
-*/
+// setters
 void Characters::setID(int id) {
 	_id = id;
 }
@@ -142,12 +134,7 @@ void Characters::setCombatPos(int x, int y) {
 	setCombatPosX(x);
 }
 
-/*
----------------------------------------------------------------------
-Builders
----------------------------------------------------------------------
-*/
-
+// builder
 void Characters::createCharacter(int id) {
 	switch (id) {
 	case 0:

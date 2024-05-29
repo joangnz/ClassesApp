@@ -30,9 +30,9 @@ int main()
 
 	while (choosing)
 	{
-		Selection::nextPage(); // Goes to the next page
+		Selection::nextPage();
 
-		for (int i = 0; i < 5; i++) // Waits 5 seconds checking for input every time
+		for (int i = 0; i < 5; i++)
 		{
 			if (Selection::checkSelect(Player)) {
 				i = 5;
@@ -53,6 +53,7 @@ int main()
 	Map::initMap();
 	Map::updateMap(nonPlayablesArray);
 	Map::printMap(Player);
+
 	while (!Combat::getFighting())
 	{
 		Map::move(Player);
@@ -62,7 +63,6 @@ int main()
 
 	system("cls");
 
-	// if superFight then fight doggy, else fight doggo
 	if (Map::getNpc() == 1) {
 		Combat::start(Player, Doggy);
 	}

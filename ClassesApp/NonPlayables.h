@@ -12,8 +12,10 @@ private:
 	static int _npcCount;
 
 public:
+	// methods
 	void speak();
 
+	// getters
 	int getId();
 	COORD getCoordinates();
 	int getCoordinatesX();
@@ -21,6 +23,7 @@ public:
 	char getChar();
 	static int getNpcCount();
 
+	// setters
 	void setId(int id);
 	void setCoordinates(int x, int y);
 	void setCoordinatesX(int x);
@@ -28,6 +31,7 @@ public:
 	void setChar(char character);
 	static void setNpcCount(int count);
 
+	// builder
 	void buildCharacter(int id, int x, int y);
 };
 

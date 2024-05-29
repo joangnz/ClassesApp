@@ -23,8 +23,4 @@ public:
 
 	// builders
 	Enemy(string name, int hp, int dmg);
-	void createEnemy(string name, int hp, int dmg);
-
-	// methods
-	void getAttributes();
 };

@@ -1,9 +1,9 @@
 #include "Map.h"
 
-int Map::height, Map::width;
-string Map::map[30][30];
+string Map::map[height][width];
 int Map::_npc = -1;
 
+// getters
 int Map::getHeight() {
 	return height;
 }
@@ -12,14 +12,11 @@ int Map::getWidth() {
 	return width;
 }
 
-void Map::setHeight(int pHeight) {
-	height = pHeight;
+int Map::getNpc() {
+	return _npc;
 }
 
-void Map::setWidth(int pWidth) {
-	width = pWidth;
-}
-
+// setters
 void Map::setMap() {
 	for (int i = 0; i < height; i++)
 	{
@@ -42,13 +39,8 @@ void Map::setNpc(int npc) {
 	_npc = npc;
 }
 
-int Map::getNpc() {
-	return _npc;
-}
-
+// methods
 void Map::initMap() {
-	setHeight(30);
-	setWidth(30);
 	setMap();
 }
 

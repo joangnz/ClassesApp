@@ -4,20 +4,17 @@ using namespace std;
 
 int Selection::_page = -1;
 
-// GETTERS
-
+// getters
 int Selection::getPage() {
 	return _page;
 }
 
-// SETTERS
-
+// setters
 void Selection::setPage(int page) {
 	_page = page;
 }
 
-// METHODS
-
+// methods
 void Selection::printPage(int page) {
 	switch (page) {
 	case -1:

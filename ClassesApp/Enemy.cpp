@@ -2,11 +2,7 @@
 
 using namespace std;
 
-/*
----------------------------------------------------------------------
-Getters
----------------------------------------------------------------------
-*/
+// getters
 int Enemy::getHealthPoints() {
 	return _healthPoints;
 }
@@ -19,11 +15,7 @@ string Enemy::getEnemyName() {
 	return _name;
 }
 
-/*
----------------------------------------------------------------------
-Setters
----------------------------------------------------------------------
-*/
+// setters
 void Enemy::setHealthPoints(int hp) {
 	_healthPoints = hp;
 
@@ -40,33 +32,9 @@ void Enemy::setEnemyName(string name) {
 	_name = name;
 }
 
-/*
----------------------------------------------------------------------
-Builders
----------------------------------------------------------------------
-*/
-
+// builder
 Enemy::Enemy(string name, int hp, int dmg) {
 	_name = name;
 	_healthPoints = hp;
 	_attackDmg = dmg;
-}
-
-// Normal Enemy, no super 
-void Enemy::createEnemy(string name, int hp, int dmg) {
-	setEnemyName(name);
-	setHealthPoints(hp);
-	setAttackDmg(dmg);
-}
-
-/*
----------------------------------------------------------------------
-Methods
----------------------------------------------------------------------
-*/
-
-//Returns all attributes
-void Enemy::getAttributes() {
-	cout << getEnemyName() << "\nHP " << getHealthPoints() << "\nDMG "
-		<< getAttackDmg() << "\n";
 }

@@ -4,6 +4,7 @@ using namespace std;
 
 int NonPlayables::_npcCount = 0;
 
+// methods
 void NonPlayables::speak() {
 	switch (_id) {
 
@@ -12,6 +13,7 @@ void NonPlayables::speak() {
 	}
 }
 
+// getters
 int NonPlayables::getId() {
 	return _id;
 }
@@ -36,6 +38,7 @@ int NonPlayables::getNpcCount() {
 	return _npcCount;
 }
 
+// setters
 void NonPlayables::setId(int id) {
 	_id = id;
 }
@@ -61,6 +64,7 @@ void NonPlayables::setNpcCount(int count) {
 	_npcCount = count;
 }
 
+// builder
 void NonPlayables::buildCharacter(int id, int x, int y) {
 	setId(id);
 	setCoordinates(x, y);

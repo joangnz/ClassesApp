@@ -35,7 +35,7 @@ public:
 	static void setAttacking(bool attacking);
 
 	static void printScreen(Characters Player, Enemy Enemy);
-	static void printSprite(); // Print enemy sprite
+	static void printSprite();
 	static void printHealthBars(Characters Player, Enemy Enemy);
 	static void printAttackMeter();
 	static void printAttackMeter(int i, int j); // Prints the attackMeter[i][j]
@@ -46,7 +46,7 @@ public:
 	static void printMercy();
 	static void printFlee();
 
-	static void selectCurrentAction(int action, Characters& Player, Enemy& Enemy); // Select Action
+	static void selectCurrentAction(int action, Characters& Player, Enemy& Enemy);
 	static void changeAction(Characters& Player, Enemy& Enemy); // Change action to next/former
 
 	static void start(Characters& Player, Enemy& Enemy);
