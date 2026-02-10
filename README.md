@@ -1,4 +1,4 @@
-This is a really basic console application I made in 2024. To run it, open the x64 folder, and then in Debug, run the .exe file.
+This is a really basic console application I made in 2024. To run it, open the solution on VS and run.
 
 Firstly, you can choose from 3 characters, each with their own stats. Then, your character is spawned in a map as an 8, and there are two encounters possible, each represented with a different number.
 
