@@ -11,3 +11,5 @@ Fight prompts the user with an Undertale-like strength meter, where you have to 
 After an action does not end the battle, the enemy attacks, leaving the user a bit of time to react and move to a position to avoid the attack.
 
 This was all pretty basic work I did on my own by playing around with the Windows Console and its environment during my first year of Web Development (early 2025).
+
+The code does have some mistakes and has a few bugs, as I stopped working on it to focus on the tasks my course was handing out.
